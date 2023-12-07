@@ -7,7 +7,7 @@ function Header() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-      <Navbar.Brand href="#home">
+      <NavLink to="/" className="navbar-brand">
             <img
               src="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg"
               width="30"
@@ -16,7 +16,7 @@ function Header() {
               alt="React Bootstrap logo"
             />
             React 
-          </Navbar.Brand>
+          </NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -26,11 +26,9 @@ function Header() {
           </Nav>
           <Nav>
           <NavDropdown title="Settings" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Login</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Logout
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Profile</NavDropdown.Item>
+              <NavDropdown.Item >Login</NavDropdown.Item>
+              <NavDropdown.Item >Logout</NavDropdown.Item>
+              <NavDropdown.Item >Profile</NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
