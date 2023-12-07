@@ -1,11 +1,10 @@
-import './App.css';
+import './App.scss';
+import Header from './components/Layout/Header/Header';
 
 function App() {
   return (
     <div className="App">
-      <header className="container">
-          <button className='btn btn-primary'>Hello World</button>
-      </header>
+        <Header/>
     </div>
   );
 }
