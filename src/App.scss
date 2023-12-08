@@ -10,9 +10,19 @@ body {
 
 .app-container{
   .header-container{
+    position:sticky;
+    top:0;
+    z-index: 100; 
     .bg-body-tertiary{
       background-color: #4A7BFA !important;
       height: 70px;
+    }
+    .btn-login{
+      background-color: white;
+      padding: 5px 15px;
+      outline: none;
+      border:1px solid black;
+      border-radius: 5px;
     }
     .navbar-collapse{
       .nav-link{
@@ -20,6 +30,49 @@ body {
         &.active{
           color: white;
         }
+      }
+    }
+  }
+  .footer-container{
+    background-color: #d9d9d9;
+    .footer-main-content{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding :30px;
+      .text-content-footer{
+        width: 200px;
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 70px;
+        color:black;
+        text-decoration: none;
+      }
+      .link-page-footer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        ul{
+          a{
+            text-decoration:underline;
+            margin-bottom: 10px;
+          }
+        }
+      }
+      .contact-footer{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 50px;
+        justify-content: center;
+      }
+    }
+    .copyright-footer{
+      display: flex;
+      justify-content: center;
+      span{
+        margin-bottom: 8px;
       }
     }
   }

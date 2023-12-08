@@ -1,0 +1,84 @@
+.home-container{
+    .header-home-content{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 60px 0 10px 0;
+        padding: 0;
+        span{
+            font-size: 20px;
+        }
+        .search-home-content{
+            input{
+                width: 300px;
+                margin-right:10px;
+                padding: 5px 15px;
+                border-radius: 5px;
+                border: 1px solid #d9d9d9;
+            }
+            button{
+                padding: 5px 15px;
+                border-radius: 5px;
+                outline: none;
+                border: 1px solid #d9d9d9;
+                background-color: #4A7BFA;
+                color: white;
+            }
+        }
+    }
+    .body-home-content{
+        border: 1px solid #d9d9d9;
+        padding: 30px 0px;
+        border-radius: 5px; 
+        display: flex;
+        flex-direction: column;
+        margin:30px 0 30px 0;
+        .filter-home-content{
+            display: flex;
+            select:first-child {
+                margin-left: 20px;
+                margin-right: 20px;
+                width: 200px !important;
+            }
+            select:last-child {
+                margin-left: 10px; 
+                width: 200px !important;   
+            }
+        }
+        .list-home-content{
+            margin:20px 0px;
+            display: flex;
+            flex-wrap: wrap;
+            .card{
+                margin:20px;
+                width: 330px !important;
+                .course-status{
+                    position: absolute;
+                    background-color: #4A7BFA;
+                    right: 0;
+                    width: 60px;
+                    height: 30px;
+                    text-align: center; 
+                    color: white;
+                    border-bottom-left-radius: 5px;
+                }
+                .card-body{
+                    button{
+                        background-color: #4A7BFA;
+                        padding: 5px 15px;
+                    }
+                }
+                .card-img-top{
+                    height: 180px;
+                    object-fit: cover;
+                    position: relative;
+                }
+            }
+        }
+        .pagination-home-content{
+            margin: 20px 20px 0 0;
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+}

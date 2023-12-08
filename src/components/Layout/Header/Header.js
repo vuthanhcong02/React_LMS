@@ -1,8 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 function Header() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
@@ -24,12 +23,18 @@ function Header() {
             <NavLink to="/my-course" className='nav-link'>Các khóa học của tôi</NavLink>
             <NavLink to="/dashboard" className='nav-link'>Dashboard</NavLink>
           </Nav>
-          <Nav>
+          {/* <Nav>
           <NavDropdown title="Settings" id="basic-nav-dropdown">
               <NavDropdown.Item >Login</NavDropdown.Item>
               <NavDropdown.Item >Logout</NavDropdown.Item>
               <NavDropdown.Item >Profile</NavDropdown.Item>
             </NavDropdown>
+          </Nav> */}
+          <Nav className="d-flex align-items-center p-2">
+            <NavLink to="/login" className='nav-link ' style={{textDecoration:'underline'}}>Bạn chưa đăng nhập?</NavLink>
+            <NavLink to="/login">
+              <button className='btn-login'>Đăng nhập</button>
+            </NavLink>
           </Nav>
         </Navbar.Collapse>
       </Container>
