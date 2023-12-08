@@ -1,6 +1,7 @@
 import React from 'react'
 import {Card,Button} from 'react-bootstrap'
 import CourseImage from '../../assets/img/course-demo.png'
+import './CardCourse.scss'
 export default function CardCourse() {
   return (
     <>

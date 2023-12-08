@@ -7,6 +7,7 @@
         padding: 0;
         span{
             font-size: 20px;
+            font-weight: 500;
         }
         .search-home-content{
             input{
@@ -49,31 +50,31 @@
             margin:20px 0px;
             display: flex;
             flex-wrap: wrap;
-            .card{
-                margin:20px;
-                width: 330px !important;
-                .course-status{
-                    position: absolute;
-                    background-color: #4A7BFA;
-                    right: 0;
-                    width: 60px;
-                    height: 30px;
-                    text-align: center; 
-                    color: white;
-                    border-bottom-left-radius: 5px;
-                }
-                .card-body{
-                    button{
-                        background-color: #4A7BFA;
-                        padding: 5px 15px;
-                    }
-                }
-                .card-img-top{
-                    height: 180px;
-                    object-fit: cover;
-                    position: relative;
-                }
-            }
+            // .card{
+            //     margin:20px;
+            //     width: 330px !important;
+            //     .course-status{
+            //         position: absolute;
+            //         background-color: #4A7BFA;
+            //         right: 0;
+            //         width: 60px;
+            //         height: 30px;
+            //         text-align: center; 
+            //         color: white;
+            //         border-bottom-left-radius: 5px;
+            //     }
+            //     .card-body{
+            //         button{
+            //             background-color: #4A7BFA;
+            //             padding: 5px 15px;
+            //         }
+            //     }
+            //     .card-img-top{
+            //         height: 180px;
+            //         object-fit: cover;
+            //         position: relative;
+            //     }
+            // }
         }
         .pagination-home-content{
             margin: 20px 20px 0 0;
