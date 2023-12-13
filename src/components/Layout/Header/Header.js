@@ -1,27 +1,33 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import { NavLink } from 'react-router-dom';
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import { NavLink } from "react-router-dom";
 function Header() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-      <NavLink to="/" className="navbar-brand">
-            <img
-              src="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg"
-              width="30"
-              height="30"
-              className="d-inline-block align-top"
-              alt="React Bootstrap logo"
-            />
-            React 
-          </NavLink>
+        <NavLink to="/" className="navbar-brand">
+          <img
+            src="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg"
+            width="30"
+            height="30"
+            className="d-inline-block align-top"
+            alt="React Bootstrap logo"
+          />
+          React
+        </NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <NavLink to="/" className='nav-link'>Trang chủ</NavLink>
-            <NavLink to="/my-course" className='nav-link'>Các khóa học của tôi</NavLink>
-            <NavLink to="/dashboard" className='nav-link'>Dashboard</NavLink>
+            <NavLink to="/" className="nav-link">
+              Trang chủ
+            </NavLink>
+            <NavLink to="/my-course" className="nav-link">
+              Các khóa học của tôi
+            </NavLink>
+            <NavLink to="/dashboard" className="nav-link">
+              Dashboard
+            </NavLink>
           </Nav>
           {/* <Nav>
           <NavDropdown title="Settings" id="basic-nav-dropdown">
@@ -31,9 +37,15 @@ function Header() {
             </NavDropdown>
           </Nav> */}
           <Nav className="d-flex align-items-center p-2">
-            <NavLink to="/login" className='nav-link ' style={{textDecoration:'underline'}}>Bạn chưa đăng nhập?</NavLink>
+            <NavLink
+              to="/login"
+              className="nav-link "
+              style={{ textDecoration: "underline" }}
+            >
+              Bạn chưa đăng nhập?
+            </NavLink>
             <NavLink to="/login">
-              <button className='btn-login'>Đăng nhập</button>
+              <button className="btn-login">Đăng nhập</button>
             </NavLink>
           </Nav>
         </Navbar.Collapse>
