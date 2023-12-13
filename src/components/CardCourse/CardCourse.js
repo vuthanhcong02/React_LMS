@@ -1,5 +1,6 @@
 import React from 'react'
 import {Card,Button} from 'react-bootstrap'
+import {Link} from 'react-router-dom'
 import CourseImage from '../../assets/img/course-demo.png'
 import './CardCourse.scss'
 export default function CardCourse() {
@@ -13,7 +14,9 @@ export default function CardCourse() {
                 <Card.Text>
                     Lập trình web cơ bản
                 </Card.Text>
-                <Button variant="primary">Truy cập</Button>
+                <Link to="/course/view/1">
+                  <Button variant="primary">Truy cập</Button>
+                  </Link>
             </Card.Body>
         </Card>
     </>

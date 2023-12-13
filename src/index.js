@@ -7,6 +7,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import MyCourse from './components/MyCourse/MyCourse';
 import DashboardUser from './components/DashboardUser/DashboardUser';
 import Home from './components/Home/Home';
+import CourseMain from './components/CourseMain/CourseMain';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
@@ -14,8 +15,9 @@ root.render(
         <Routes>
           <Route path="/" element={<App />} >
             <Route index element={<Home />}/>
-            <Route path="/my-course" element={<MyCourse/>}/>
+            <Route path="my-course" element={<MyCourse/>}/>
             <Route path="dashboard" element={<DashboardUser />}/>
+            <Route path="course/view/:id" element={<CourseMain />}/>
           </Route>
         </Routes>
       </BrowserRouter>
