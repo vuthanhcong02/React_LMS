@@ -9,13 +9,8 @@ import {
   SidebarContent,
 } from "react-pro-sidebar";
 
-import {
-  FaTachometerAlt,
-  FaGem,
-  FaGithub,
-  FaRegLaughWink,
-} from "react-icons/fa";
-
+import { FaTachometerAlt, FaGem, FaGithub } from "react-icons/fa";
+import { Link } from "react-router-dom";
 const SideBar = (props) => {
   const { collapsed, toggled, handleToggleSidebar } = props;
   return (
@@ -45,22 +40,26 @@ const SideBar = (props) => {
 
         <SidebarContent>
           <Menu iconShape="circle">
-            <MenuItem
-              icon={<FaTachometerAlt />}
-              suffix={<span className="badge red">New</span>}
-            >
-              dashboard
+            <MenuItem icon={<FaTachometerAlt />}>
+              Tổng quan
+              <Link to="/admin" />
             </MenuItem>
-            <MenuItem icon={<FaGem />}> components </MenuItem>
           </Menu>
           <Menu iconShape="circle">
-            <SubMenu
-              suffix={<span className="badge yellow">3</span>}
-              icon={<FaRegLaughWink />}
-            >
-              <MenuItem> 1</MenuItem>
-              <MenuItem> 2</MenuItem>
-              <MenuItem> 3</MenuItem>
+            <SubMenu icon={<FaGem />} title="Quản lý">
+              <MenuItem> Quản lí khóa học</MenuItem>
+              <MenuItem> Quản lí giảng viên</MenuItem>
+              <MenuItem>
+                Quản lí người dùng
+                <Link to="manager-users" />
+              </MenuItem>
+              <MenuItem> Quản lí bài tập</MenuItem>
+              <MenuItem> Quản lí bài thi</MenuItem>
+              <MenuItem> Quản lí câu hỏi</MenuItem>
+              <MenuItem> Quản lí đáp án</MenuItem>
+              <MenuItem> Quản lí điểm danh</MenuItem>
+              <MenuItem> Quản lí thông báo</MenuItem>
+              <MenuItem> Quản lí tài liệu</MenuItem>
             </SubMenu>
           </Menu>
         </SidebarContent>

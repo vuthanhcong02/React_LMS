@@ -9,6 +9,8 @@ import DashboardUser from "./components/DashboardUser/DashboardUser";
 import Home from "./components/Home/Home";
 import CourseMain from "./components/CourseMain/CourseMain";
 import Admin from "./components/Admin/Admin";
+import Dashboard from "./components/Admin/Managers/Dashboard/Dashboard";
+import User from "./components/Admin/Managers/User/User";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
@@ -20,7 +22,10 @@ root.render(
         <Route path="dashboard" element={<DashboardUser />} />
         <Route path="course/view/:id" element={<CourseMain />} />
       </Route>
-      <Route path="admin" element={<Admin />} />
+      <Route path="admin" element={<Admin />}>
+        <Route index element={<Dashboard />} />
+        <Route path="manager-users" element={<User />} />
+      </Route>
     </Routes>
   </BrowserRouter>
   // </React.StrictMode>
