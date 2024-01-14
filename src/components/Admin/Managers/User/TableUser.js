@@ -1,5 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import UpdateUserModal from "./UpdateUserModal";
 export default function TableUser({ listUsers }) {
+  const [show, setShow] = useState(false);
+  const [userUpdate, setUserUpdate] = useState({});
+  const handleShowUser = (user) => {
+    console.log(user);
+    setShow(true);
+    setUserUpdate(user);
+  };
   return (
     <>
       <table className="table table-bordered table-hover mt-4">
@@ -41,6 +49,7 @@ export default function TableUser({ listUsers }) {
                       className="btn btn-warning"
                       data-bs-toggle="modal"
                       data-bs-target="#exampleModal"
+                      onClick={() => handleShowUser(user)}
                     >
                       Sửa
                     </button>
@@ -65,6 +74,11 @@ export default function TableUser({ listUsers }) {
           )}
         </tbody>
       </table>
+      <UpdateUserModal
+        showModal={show}
+        handleCloseModal={() => setShow(false)}
+        userUpdate={userUpdate}
+      />
     </>
   );
 }

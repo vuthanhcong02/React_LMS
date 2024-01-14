@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { FaPlus } from "react-icons/fa";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { toast } from "react-toastify";
-import { postCreateUser } from "../../../../service/apiService";
-export default function CreateUserModal({ handleShowUser }) {
-  const [show, setShow] = useState(false);
+export default function UpdateUserModal({
+  showModal,
+  handleCloseModal,
+  userUpdate,
+}) {
+  //   console.log(showModal);
+  //   console.log(userUpdate);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,15 +16,13 @@ export default function CreateUserModal({ handleShowUser }) {
   const [avatar, setAvatar] = useState("");
   const [previewAvatar, setPreviewAvatar] = useState("");
   const handleClose = () => {
-    setShow(false);
-    setUsername("");
-    setEmail("");
-    setPassword("");
-    setRole("student");
-    setAvatar("");
-    setPreviewAvatar("");
+    handleCloseModal(false);
+    if (userUpdate) {
+      setUsername(userUpdate.name);
+      setEmail(userUpdate.email);
+      setRole(userUpdate.role);
+    }
   };
-  const handleShow = () => setShow(true);
 
   const changeAvatar = (e) => {
     if (!e.target.files || e.target.files.length === 0) {
@@ -45,6 +46,15 @@ export default function CreateUserModal({ handleShowUser }) {
     return () => URL.revokeObjectURL(objectUrl);
   }, [avatar]);
 
+  useEffect(() => {
+    console.log(userUpdate);
+    if (userUpdate) {
+      setUsername(userUpdate.name);
+      setEmail(userUpdate.email);
+      setRole(userUpdate.role);
+    }
+  }, [userUpdate]);
+
   const isEmpty = (value) => value === "";
 
   const validateField = (value, regex, errorMessage) => {
@@ -54,13 +64,6 @@ export default function CreateUserModal({ handleShowUser }) {
     }
     return true;
   };
-
-  const checkEmail = (email) => {
-    const emailRegex =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return validateField(email, emailRegex, "Email trống hoặc không hợp lệ");
-  };
-
   const checkUsername = (username) => {
     const usernameRegex = /^[a-zA-Z0-9]+$/;
     return validateField(
@@ -78,51 +81,15 @@ export default function CreateUserModal({ handleShowUser }) {
     );
   };
   const handleSubmit = async () => {
-    if (
-      !checkEmail(email) ||
-      !checkUsername(username) ||
-      !checkPassword(password)
-    ) {
+    if (!checkUsername(username) || !checkPassword(password)) {
       return;
-    }
-
-    try {
-      const data = await postCreateUser(
-        email,
-        password,
-        username,
-        role,
-        avatar
-      );
-      handleClose();
-      if (data.status) {
-        toast.success("Thêm người dùng thành công");
-      }
-      handleShowUser();
-      // console.log(data);
-    } catch (error) {
-      toast.error(error);
     }
   };
   return (
     <>
-      <div className="user-manager-btn-add">
-        <Button
-          className="btn btn-primary"
-          onClick={handleShow}
-          style={{
-            width: "150px",
-            marginLeft: "10px",
-            padding: "7px 16px",
-          }}
-        >
-          <FaPlus size={20} style={{ marginBottom: "4px" }} />
-          Thêm mới
-        </Button>
-      </div>
-      <Modal show={show} onHide={handleClose} size="lg" backdrop="static">
+      <Modal show={showModal} size="lg" backdrop="static" onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Thêm mới người dùng</Modal.Title>
+          <Modal.Title>Cập nhật người dùng</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form className="row g-3">
@@ -145,14 +112,15 @@ export default function CreateUserModal({ handleShowUser }) {
               <input
                 type="email"
                 className="form-control"
-                onChange={(e) => setEmail(e.target.value)}
                 value={email}
-                required
+                disabled
               />
             </div>
             <div className="col-md-6">
               <label className="form-label">
-                Mật khẩu<span style={{ color: "red" }}>(*)</span>
+                Mật khẩu
+                <span style={{ color: "red", marginRight: "5px" }}>(*)</span>
+                (Mật khẩu mới nếu muốn thay đổi)
               </label>
               <input
                 type="password"
@@ -170,10 +138,9 @@ export default function CreateUserModal({ handleShowUser }) {
                 id="inputState"
                 className="form-select"
                 onChange={(e) => setRole(e.target.value)}
+                value={role}
               >
-                <option defaultValue={"student"} value={role}>
-                  Sinh viên
-                </option>
+                <option value={"student"}>Sinh viên</option>
                 <option value={"teacher"}>Giảng viên</option>
                 <option value={"admin"}>Admin</option>
               </select>
@@ -218,7 +185,7 @@ export default function CreateUserModal({ handleShowUser }) {
               handleSubmit();
             }}
           >
-            Thêm mới
+            Lưu
           </Button>
         </Modal.Footer>
       </Modal>
