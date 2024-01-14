@@ -1,17 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { showListUser } from "../../../../service/apiService";
-export default function TableUser() {
-  const [users, setUsers] = useState([]);
-  useEffect(() => {
-    const showUser = async () => {
-      const data = await showListUser();
-      console.log(data);
-      setUsers(data.data.data);
-    };
-    showUser();
-  }, []);
-  console.log(users);
-
+import React from "react";
+export default function TableUser({ listUsers }) {
   return (
     <>
       <table className="table table-bordered table-hover mt-4">
@@ -28,8 +16,8 @@ export default function TableUser() {
           </tr>
         </thead>
         <tbody>
-          {users ? (
-            users.map((user, index) => {
+          {listUsers ? (
+            listUsers.map((user, index) => {
               return (
                 <tr key={index}>
                   <th scope="row">{index + 1}</th>

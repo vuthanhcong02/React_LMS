@@ -4,7 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { toast } from "react-toastify";
 import { postCreateUser } from "../../../../service/apiService";
-export default function CreateUserModal() {
+export default function CreateUserModal({ handleShowUser }) {
   const [show, setShow] = useState(false);
 
   const [username, setUsername] = useState("");
@@ -99,6 +99,7 @@ export default function CreateUserModal() {
       if (data.status) {
         toast.success("Thêm người dùng thành công");
       }
+      handleShowUser();
       // console.log(data);
     } catch (error) {
       toast.error(error);
