@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { FaPlus } from "react-icons/fa";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import axios from "axios";
 import { toast } from "react-toastify";
+import { postCreateUser } from "../../../../service/apiService";
 export default function CreateUserModal() {
   const [show, setShow] = useState(false);
 
@@ -70,30 +70,38 @@ export default function CreateUserModal() {
       "Username trống hoặc không hợp lệ"
     );
   };
-
+  const checkPassword = (password) => {
+    const passwordRegex = /^.{6,}$/;
+    return validateField(
+      password,
+      passwordRegex,
+      "Password trống hoặc không hợp lệ"
+    );
+  };
   const handleSubmit = async () => {
-    const data = new FormData();
-    data.append("username", username);
-    data.append("email", email);
-    data.append("password", password);
-    data.append("role", role);
-    data.append("avatar", avatar);
-    if (!checkEmail(email) || !checkUsername(username)) {
+    if (
+      !checkEmail(email) ||
+      !checkUsername(username) ||
+      !checkPassword(password)
+    ) {
       return;
     }
 
     try {
-      const res = await axios.post(
-        "http://127.0.0.1:8000/api/users/create",
-        data
+      const data = await postCreateUser(
+        email,
+        password,
+        username,
+        role,
+        avatar
       );
       handleClose();
-      if (res.data.status) {
+      if (data.status) {
         toast.success("Thêm người dùng thành công");
       }
-      console.log(res);
+      // console.log(data);
     } catch (error) {
-      console.error(error);
+      toast.error(error);
     }
   };
   return (
