@@ -9,4 +9,7 @@ const postCreateUser = (email, password, username, role, avatar) => {
 
   return instance.post("users/create", data);
 };
-export { postCreateUser };
+const showListUser = () => {
+  return instance.get("users");
+};
+export { postCreateUser, showListUser };
