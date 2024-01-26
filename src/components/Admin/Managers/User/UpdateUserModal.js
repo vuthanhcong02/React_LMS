@@ -2,11 +2,8 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { toast } from "react-toastify";
-export default function UpdateUserModal({
-  showModal,
-  handleCloseModal,
-  userUpdate,
-}) {
+import { updateUser } from "../../../../service/apiService";
+export default function UpdateUserModal({ show, setShow, userUpdate }) {
   //   console.log(showModal);
   //   console.log(userUpdate);
   const [username, setUsername] = useState("");
@@ -16,12 +13,13 @@ export default function UpdateUserModal({
   const [avatar, setAvatar] = useState("");
   const [previewAvatar, setPreviewAvatar] = useState("");
   const handleClose = () => {
-    handleCloseModal(false);
-    if (userUpdate) {
-      setUsername(userUpdate.name);
-      setEmail(userUpdate.email);
-      setRole(userUpdate.role);
-    }
+    setShow(false);
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setRole("student");
+    setAvatar("");
+    setPreviewAvatar("");
   };
 
   const changeAvatar = (e) => {
@@ -54,11 +52,8 @@ export default function UpdateUserModal({
       setRole(userUpdate.role);
     }
   }, [userUpdate]);
-
-  const isEmpty = (value) => value === "";
-
   const validateField = (value, regex, errorMessage) => {
-    if (isEmpty(value) || !regex.test(String(value).toLowerCase())) {
+    if (!regex.test(String(value).toLowerCase())) {
       toast.error(errorMessage);
       return false;
     }
@@ -81,13 +76,33 @@ export default function UpdateUserModal({
     );
   };
   const handleSubmit = async () => {
-    if (!checkUsername(username) || !checkPassword(password)) {
+    if (!checkUsername(username)) {
       return;
+    }
+    if (password) {
+      if (!checkPassword(password)) {
+        return;
+      }
+    }
+    try {
+      const data = await updateUser(
+        userUpdate.id,
+        password,
+        username,
+        role,
+        avatar
+      );
+      handleClose();
+      if (data.success) {
+        toast.success("Cập nhật người dùng thành công");
+      }
+    } catch (error) {
+      toast.error(error);
     }
   };
   return (
     <>
-      <Modal show={showModal} size="lg" backdrop="static" onHide={handleClose}>
+      <Modal show={show} size="lg" backdrop="static" onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Cập nhật người dùng</Modal.Title>
         </Modal.Header>
@@ -127,7 +142,6 @@ export default function UpdateUserModal({
                 className="form-control"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
-                required
               />
             </div>
             <div className="col-md-6">
@@ -140,7 +154,9 @@ export default function UpdateUserModal({
                 onChange={(e) => setRole(e.target.value)}
                 value={role}
               >
-                <option value={"student"}>Sinh viên</option>
+                <option value={"student"} defaultValue={"student"}>
+                  Sinh viên
+                </option>
                 <option value={"teacher"}>Giảng viên</option>
                 <option value={"admin"}>Admin</option>
               </select>

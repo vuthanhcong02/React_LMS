@@ -1,12 +1,19 @@
-import React, { useState, useEffect } from "react";
-import UpdateUserModal from "./UpdateUserModal";
-export default function TableUser({ listUsers }) {
-  const [show, setShow] = useState(false);
+import React, { useState } from "react";
+export default function TableUser({
+  listUsers,
+  handleBtnShowUserDelete,
+  handleBtnShowUserUpdate,
+}) {
   const [userUpdate, setUserUpdate] = useState({});
-  const handleShowUser = (user) => {
+  const handleShowModalUpdate = (user) => {
     console.log(user);
-    setShow(true);
+    handleBtnShowUserUpdate();
+
     setUserUpdate(user);
+  };
+  const handleShowModalDelete = (user) => {
+    console.log("user", user);
+    handleBtnShowUserDelete(user);
   };
   return (
     <>
@@ -49,7 +56,7 @@ export default function TableUser({ listUsers }) {
                       className="btn btn-warning"
                       data-bs-toggle="modal"
                       data-bs-target="#exampleModal"
-                      onClick={() => handleShowUser(user)}
+                      onClick={() => handleShowModalUpdate(user)}
                     >
                       Sửa
                     </button>
@@ -60,6 +67,7 @@ export default function TableUser({ listUsers }) {
                       className="btn btn-danger"
                       data-bs-toggle="modal"
                       data-bs-target="#exampleModal"
+                      onClick={() => handleShowModalDelete(user)}
                     >
                       Xóa
                     </button>
@@ -74,11 +82,6 @@ export default function TableUser({ listUsers }) {
           )}
         </tbody>
       </table>
-      <UpdateUserModal
-        showModal={show}
-        handleCloseModal={() => setShow(false)}
-        userUpdate={userUpdate}
-      />
     </>
   );
 }
