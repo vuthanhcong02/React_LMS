@@ -9,8 +9,8 @@ const postCreateUser = (email, password, username, role, avatar) => {
 
   return instance.post("users/create", data);
 };
-const showListUser = () => {
-  return instance.get("users");
+const showListUser = (page) => {
+  return instance.get(`users?page=${page}`);
 };
 const updateUser = (id, password, username, role, avatar) => {
   const data = new FormData();

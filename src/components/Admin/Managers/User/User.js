@@ -11,13 +11,15 @@ export default function User() {
   const [showModalUpdate, setShowModalUpdate] = useState(false);
   const [showModalDelete, setShowModalDelete] = useState(false);
   const [userDelete, setUserDelete] = useState({});
+  const [pageCount, setPageCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
     handleShowUser();
   }, []);
-  const handleShowUser = async () => {
-    const data = await showListUser();
-    console.log(data);
+  const handleShowUser = async (currentPage) => {
+    const data = await showListUser(currentPage);
     setListUsers(data.data.data);
+    setPageCount(data.data.last_page);
   };
   console.log(listUsers);
   const handleShowModalCreate = () => {
@@ -32,6 +34,14 @@ export default function User() {
     console.log(showModalDelete);
     setUserDelete(user);
     console.log("User Delete", user);
+  };
+  ///paginate
+  const handlePageClick = async (event) => {
+    const newPage = +event.selected + 1;
+    const data = await showListUser(newPage);
+    setCurrentPage(newPage);
+    setListUsers(data.data.data);
+    console.log(`User requested page number ${event.selected}`);
   };
   return (
     <>
@@ -53,6 +63,7 @@ export default function User() {
             handleShowModalDelete={handleShowModalDelete}
             userDelete={userDelete}
             handleShowUser={handleShowUser}
+            currentPage={currentPage}
           />
         </div>
         <div className="user-manager-table container">
@@ -61,6 +72,8 @@ export default function User() {
             handleShowUser={handleShowUser}
             handleBtnShowUserDelete={handleShowModalDelete}
             handleBtnShowUserUpdate={handleShowModalUpdate}
+            pageCount={pageCount}
+            handlePageClick={handlePageClick}
           />
         </div>
       </div>

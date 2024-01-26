@@ -4,13 +4,12 @@ import { deleteUser } from "../../../../service/apiService";
 import { toast } from "react-toastify";
 
 function DeleteUserModal(props) {
-  const { show, setShow, userDelete, handleShowUser } = props;
+  const { show, setShow, userDelete, handleShowUser, currentPage } = props;
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   const handleDeleteUser = () => {
     deleteUserSelected();
     handleClose();
-    handleShowUser();
+    handleShowUser(currentPage);
   };
   const deleteUserSelected = async () => {
     const data = await deleteUser(userDelete.id);

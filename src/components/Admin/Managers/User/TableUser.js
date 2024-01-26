@@ -1,20 +1,23 @@
-import React, { useState } from "react";
+import ReactPaginate from "https://cdn.skypack.dev/react-paginate@7.1.3";
 export default function TableUser({
   listUsers,
   handleBtnShowUserDelete,
   handleBtnShowUserUpdate,
+  pageCount,
+  handlePageClick,
 }) {
-  const [userUpdate, setUserUpdate] = useState({});
+  // const [userUpdate, setUserUpdate] = useState({});
   const handleShowModalUpdate = (user) => {
     console.log(user);
     handleBtnShowUserUpdate();
 
-    setUserUpdate(user);
+    // setUserUpdate(user);
   };
   const handleShowModalDelete = (user) => {
     console.log("user", user);
     handleBtnShowUserDelete(user);
   };
+
   return (
     <>
       <table className="table table-bordered table-hover mt-4">
@@ -82,6 +85,26 @@ export default function TableUser({
           )}
         </tbody>
       </table>
+      <ReactPaginate
+        nextLabel="next >"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={2}
+        pageCount={pageCount}
+        previousLabel="< previous"
+        pageClassName="page-item"
+        pageLinkClassName="page-link"
+        previousClassName="page-item"
+        previousLinkClassName="page-link"
+        nextClassName="page-item"
+        nextLinkClassName="page-link"
+        breakLabel="..."
+        breakClassName="page-item"
+        breakLinkClassName="page-link"
+        containerClassName="pagination"
+        activeClassName="active"
+        renderOnZeroPageCount={null}
+      />
     </>
   );
 }
