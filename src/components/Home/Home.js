@@ -2,6 +2,8 @@ import React from "react";
 import { Form, Pagination } from "react-bootstrap";
 import CardCourse from "../CardCourse/CardCourse";
 import "./Home.scss";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function Home() {
   return (
     <>
@@ -50,6 +52,20 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      {/* Same as */}
+      <ToastContainer />
     </>
   );
 }

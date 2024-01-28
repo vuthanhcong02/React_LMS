@@ -32,5 +32,17 @@ const postLogin = (email, password) => {
     password: password,
   });
 };
-
-export { postCreateUser, showListUser, updateUser, deleteUser, postLogin };
+const postLogout = () => {
+  const token = localStorage.getItem("token");
+  if (!token) return;
+  instance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return instance.post("auth/logout");
+};
+export {
+  postCreateUser,
+  showListUser,
+  updateUser,
+  deleteUser,
+  postLogin,
+  postLogout,
+};

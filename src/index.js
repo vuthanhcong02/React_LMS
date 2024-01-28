@@ -12,6 +12,7 @@ import Admin from "./components/Admin/Admin";
 import Dashboard from "./components/Admin/Managers/Dashboard/Dashboard";
 import User from "./components/Admin/Managers/User/User";
 import Login from "./components/Auth/Login";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>

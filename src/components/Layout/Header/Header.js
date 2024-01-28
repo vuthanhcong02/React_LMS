@@ -2,9 +2,12 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { postLogout } from "../../../service/apiService";
+import { toast } from "react-toastify";
 function Header() {
+  const navigate = useNavigate();
   const [showSettings, setShowSettings] = useState(false);
   useEffect(() => {
     const handleShowSettings = () => {
@@ -14,6 +17,13 @@ function Header() {
     };
     handleShowSettings();
   }, []);
+  const handleLogout = async () => {
+    await postLogout();
+    setShowSettings(!showSettings);
+    localStorage.removeItem("token");
+    navigate("/");
+    toast.success("Đăng xuất thành công");
+  };
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
@@ -44,7 +54,9 @@ function Header() {
             <>
               <Nav className="d-flex align-items-center p-3">
                 <NavDropdown title="Cài đặt" id="basic-nav-dropdown">
-                  <NavDropdown.Item>Đăng xuất</NavDropdown.Item>
+                  <NavDropdown.Item onClick={() => handleLogout()}>
+                    Đăng xuất
+                  </NavDropdown.Item>
                   <NavDropdown.Item>Thông tin cá nhân</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
