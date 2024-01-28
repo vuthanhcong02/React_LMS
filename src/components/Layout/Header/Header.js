@@ -1,8 +1,19 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import { NavLink } from "react-router-dom";
+import { useState, useEffect } from "react";
 function Header() {
+  const [showSettings, setShowSettings] = useState(false);
+  useEffect(() => {
+    const handleShowSettings = () => {
+      if (localStorage.getItem("token")) {
+        setShowSettings(!showSettings);
+      }
+    };
+    handleShowSettings();
+  }, []);
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
@@ -29,25 +40,31 @@ function Header() {
               Dashboard
             </NavLink>
           </Nav>
-          {/* <Nav>
-          <NavDropdown title="Settings" id="basic-nav-dropdown">
-              <NavDropdown.Item >Login</NavDropdown.Item>
-              <NavDropdown.Item >Logout</NavDropdown.Item>
-              <NavDropdown.Item >Profile</NavDropdown.Item>
-            </NavDropdown>
-          </Nav> */}
-          <Nav className="d-flex align-items-center p-2">
-            <NavLink
-              to="/login"
-              className="nav-link "
-              style={{ textDecoration: "underline" }}
-            >
-              Bạn chưa đăng nhập?
-            </NavLink>
-            <NavLink to="/login">
-              <button className="btn-login">Đăng nhập</button>
-            </NavLink>
-          </Nav>
+          {showSettings ? (
+            <>
+              <Nav className="d-flex align-items-center p-3">
+                <NavDropdown title="Cài đặt" id="basic-nav-dropdown">
+                  <NavDropdown.Item>Đăng xuất</NavDropdown.Item>
+                  <NavDropdown.Item>Thông tin cá nhân</NavDropdown.Item>
+                </NavDropdown>
+              </Nav>
+            </>
+          ) : (
+            <>
+              <Nav className="d-flex align-items-center p-2">
+                <NavLink
+                  to="/login"
+                  className="nav-link "
+                  style={{ textDecoration: "underline" }}
+                >
+                  Bạn chưa đăng nhập?
+                </NavLink>
+                <NavLink to="/login">
+                  <button className="btn-login">Đăng nhập</button>
+                </NavLink>
+              </Nav>
+            </>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>

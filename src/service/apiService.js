@@ -26,4 +26,11 @@ const updateUser = (id, password, username, role, avatar) => {
 const deleteUser = (id) => {
   return instance.delete(`users/${id}`);
 };
-export { postCreateUser, showListUser, updateUser, deleteUser };
+const postLogin = (email, password) => {
+  return instance.post("auth/login", {
+    email: email,
+    password: password,
+  });
+};
+
+export { postCreateUser, showListUser, updateUser, deleteUser, postLogin };
